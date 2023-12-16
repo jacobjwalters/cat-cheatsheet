@@ -1,3 +1,12 @@
-\wt{4.2.1 Yoneda} Let $\cat A$ be a locally small category and $X$ be a presheaf on $\cat A$. Then 
+\wt{4.2.1 Yoneda} Let $\cat A$ be a locally small category and $X : \cat{A}^{\op} \to \Set$ be a presheaf on $\cat A$. Then 
 $[\cat{A}^{\op}, \Set](H_A, X) \cong X(A)$
 naturally in $A \in \cat A$ and $X \in [\cat{A}^{\op},\Set]$.
+\wpf{4.2.1 Sketch of the proof} Let $X$ and $\cat A$ be as above.
+Define functions $[\cat{A}^{\op}, \Set] \isofuncs{(\hat\cdot)}{(\tilde\cdot)} X(A)$:
+Given $\alpha : H_A \to X$, define the natural transformation $\hat\alpha = \alpha_A(1_A)$.
+Given $x \in X(A)$, define the natural transformation $\tilde{x} : H_A \to X$. For each $B \in \cat A$, and $f \in \cat{A}(B, A)$, define $\tilde{x}_B : \cat{A}(B, A) \to X(B)$ as $\tilde{x}_B(f) = (X(f))(X) \in X(B)$. Then show naturality of $\tilde{x}_B$. Diagram chase by choosing $f \in \cat{A}(B, A)$ as the top left, then applying the functors $H_A(g)$ and $X(g)$ for some $g : B' \to B$ (beware contravariance!).
+Now, given $x \in X(A)$, we show $\hat{\tilde{x}} = x$, by $\hat{\tilde{x}} = \tilde{x}_A(1_A) = (X1_A)(x) = 1_{X(A)}(x) = x$.
+Then, gven $\alpha : H_A \to X$, we show $\tilde{\hat\alpha} = \alpha$ componentwise on $B \in \cat A$ (that $(\tilde{\hat\alpha})_B(f) = \alpha_B(f)$). The LHS is $(\tilde{\hat\alpha})_B (f) = (Xf)(\hat\alpha) = (Xf)(\alpha_A(1_A))$. For the RHS, use naturality of $\alpha$ to show $Xf \circ \alpha_A = \alpha_B \circ H_A(f)$. Evaluating these at $1_A \in \cat{A}(A, A)$ gives $(Xf)(\alpha_A(1_A)) = \alpha_B(f)$, completing the equation.
+Finaly, we need to show naturality of $(\hat\cdot)$ and $(\tilde\cdot)$, but we need only show one direction is an isomorphism componentwise. We prove $(\hat\cdot)$ is natural in both $(A, X)$ by showing is is natural in $X$ for fixed $A$ and vice versa.
+Naturality in $A$ says for each $X \in [\cat{A}^{\op}, \Set]$ and $f : B \to A \in \cat{A}$, $(\hat\cdot) \circ (- \circ H_f) = Xf \circ (\hat\cdot)$ commutes. Substituting $\alpha : H_A \to X$, we compute $\alpha \circ H_f)_B(1_B) = \alpha_B((H_f)_B(1_B)) = \alpha_B(f \circ 1_B) = \alpha_B(f) = (Xf)(\alpha_A(1_A))$.
+Then, naturality in $X$ say for each natural transformation $\theta : X \Rightarrow X'$, $(\hat\cdot) \circ (\theta \circ -) = \theta_A \circ (\hat\cdot)$ commutes. Once again, we substitute $\alpha : H_A \to X$, and the square commutes simply. QED.
